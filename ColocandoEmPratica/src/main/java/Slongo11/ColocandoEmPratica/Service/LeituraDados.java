@@ -2,6 +2,7 @@ package Slongo11.ColocandoEmPratica.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.CollectionType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,8 +21,11 @@ public class LeituraDados implements ILeituraDados {
 		}
 	}
 	public <T> List<T> jsonToObjectList(String json, Class<T> classe) {
+		CollectionType lista = mapper
+				.getTypeFactory()
+				.constructCollectionType(List.class, classe);
 		try {
-			return Arrays.asList( mapper.readValue(json,(Class<T[]>) java.lang.reflect.Array.newInstance(classe, 0).getClass() ));
+			return mapper.readValue(json,lista);
 		} catch (JsonProcessingException e) {
 			throw new RuntimeException(e);
 		}
