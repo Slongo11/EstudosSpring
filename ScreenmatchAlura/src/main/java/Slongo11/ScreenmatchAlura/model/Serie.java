@@ -78,6 +78,10 @@ public class Serie {
 		return avaliacao;
 	}
 
+	public List<Episodios> getEpisodios() {
+		return episodios;
+	}
+
 	public void setAvaliacao(double avaliacao) {
 		this.avaliacao = avaliacao;
 	}
